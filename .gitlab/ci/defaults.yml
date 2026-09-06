@@ -1,0 +1,13 @@
+default:
+  image: golang:1.24
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - .cache/
+  before_script:
+    - export GOPATH="$CI_PROJECT_DIR/.cache/gopath"
+    - export GOCACHE="$CI_PROJECT_DIR/.cache/gobuild"
+
+.go:
+  stage: check
+  interruptible: true

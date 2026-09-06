@@ -1,0 +1,4 @@
+test:
+  extends: .go
+  script:
+    - go test ./... -race -count=1

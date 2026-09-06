@@ -1,0 +1,24 @@
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  needs:
+    - job: build
+      artifacts: true
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - echo "publishing $CI_COMMIT_TAG"
+  release:
+    tag_name: $CI_COMMIT_TAG
+    name: $CI_COMMIT_TAG
+    description: "gitlift $CI_COMMIT_TAG"
+    assets:
+      links:
+        - name: gitlift_linux_amd64
+          url: $CI_PROJECT_URL/-/jobs/$BUILD_JOB_ID/artifacts/raw/dist/gitlift_linux_amd64
+        - name: gitlift_linux_arm64
+          url: $CI_PROJECT_URL/-/jobs/$BUILD_JOB_ID/artifacts/raw/dist/gitlift_linux_arm64
+        - name: gitlift_darwin_amd64
+          url: $CI_PROJECT_URL/-/jobs/$BUILD_JOB_ID/artifacts/raw/dist/gitlift_darwin_amd64
+        - name: gitlift_darwin_arm64
+          url: $CI_PROJECT_URL/-/jobs/$BUILD_JOB_ID/artifacts/raw/dist/gitlift_darwin_arm64
