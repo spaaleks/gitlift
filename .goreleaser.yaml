@@ -35,6 +35,7 @@ release:
     name: gitlift
 
 changelog:
+  format: "{{ .SHA }}: {{ .Message }}"
   use: github
   sort: asc
   filters:
