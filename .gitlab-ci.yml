@@ -1,14 +1,17 @@
 stages:
   - check
   - build
+  - release
 
 include:
   - local: .gitlab/ci/defaults.yml
   - local: .gitlab/ci/lint.yml
   - local: .gitlab/ci/test.yml
   - local: .gitlab/ci/build.yml
+  - local: .gitlab/ci/release.yml
 
 workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_TAG
     - if: $CI_COMMIT_BRANCH

@@ -3,16 +3,18 @@ build:
   stage: build
   variables:
     GIT_DEPTH: 0
-  parallel:
-    matrix:
-      - GOOS: linux
-        GOARCH: [amd64, arm64]
-      - GOOS: darwin
-        GOARCH: [amd64, arm64]
   script:
-    - bin/build-binary.sh --out "dist/gitlift_${GOOS}_${GOARCH}"
+    - |
+      for target in linux/amd64 linux/arm64 darwin/amd64 darwin/arm64; do
+        export GOOS="${target%/*}" GOARCH="${target#*/}"
+        bin/build-binary.sh --out "dist/gitlift_${GOOS}_${GOARCH}"
+      done
+    - ls -l dist/
+    - echo "BUILD_JOB_ID=$CI_JOB_ID" > build.env
   artifacts:
-    name: "gitlift_${GOOS}_${GOARCH}"
+    name: gitlift-binaries
     paths:
       - dist/
     expire_in: 1 week
+    reports:
+      dotenv: build.env
