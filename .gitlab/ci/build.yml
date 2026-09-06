@@ -1,0 +1,18 @@
+build:
+  extends: .go
+  stage: build
+  variables:
+    GIT_DEPTH: 0
+  parallel:
+    matrix:
+      - GOOS: linux
+        GOARCH: [amd64, arm64]
+      - GOOS: darwin
+        GOARCH: [amd64, arm64]
+  script:
+    - bin/build-binary.sh --out "dist/gitlift_${GOOS}_${GOARCH}"
+  artifacts:
+    name: "gitlift_${GOOS}_${GOARCH}"
+    paths:
+      - dist/
+    expire_in: 1 week

@@ -1,0 +1,44 @@
+version: 2
+
+project_name: gitlift
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: gitlift
+    main: ./cmd/gitlift
+    binary: gitlift
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w -X github.com/spaaleks/gitlift.Version={{ .Version }}
+
+archives:
+  - id: gitlift
+    formats: [tar.gz]
+    name_template: "gitlift_{{ .Os }}_{{ .Arch }}"
+    files:
+      - README.md
+      - LICENSE*
+
+checksum:
+  name_template: "checksums.txt"
+  algorithm: sha256
+
+release:
+  github:
+    owner: spaaleks
+    name: gitlift
+
+changelog:
+  use: github
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
