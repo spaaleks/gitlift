@@ -1,0 +1,9 @@
+dist/
+.cache/
+
+.gitlift.yaml
+.providers.yaml
+templates/custom/
+
+.DS_Store
+*.swp
