@@ -54,6 +54,6 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: gitlift-binaries
+          name: gitlift-dev-binaries
           path: dist/
           if-no-files-found: error

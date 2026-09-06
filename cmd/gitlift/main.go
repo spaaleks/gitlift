@@ -26,7 +26,7 @@ func main() {
 
 	switch {
 	case *showVersion:
-		fmt.Println("gitlift", gitlift.Version)
+		fmt.Println("gitlift", gitlift.Release())
 		return
 	case *showPaths:
 		printPaths()

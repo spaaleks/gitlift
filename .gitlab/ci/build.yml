@@ -12,7 +12,7 @@ build:
     - ls -l dist/
     - echo "BUILD_JOB_ID=$CI_JOB_ID" > build.env
   artifacts:
-    name: gitlift-binaries
+    name: gitlift-dev-binaries
     paths:
       - dist/
     expire_in: 1 week

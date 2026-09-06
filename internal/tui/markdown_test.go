@@ -166,3 +166,20 @@ func TestLiteralStarsInProseAreKept(t *testing.T) {
 		t.Errorf("a lone star is content, not emphasis: %q", out)
 	}
 }
+
+func TestHelpComesFromTheReadme(t *testing.T) {
+	help := gitlift.Help()
+
+	if !strings.Contains(help, "## Templates") {
+		t.Error("help should be the README")
+	}
+	if strings.Contains(help, "![") {
+		t.Error("image lines should be stripped")
+	}
+}
+
+func TestReleaseFallsBackToBuildInfo(t *testing.T) {
+	if got := gitlift.Release(); got == "" {
+		t.Error("a version string should never be empty")
+	}
+}

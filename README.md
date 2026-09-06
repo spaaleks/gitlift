@@ -6,12 +6,19 @@ Works against GitHub, GitHub Enterprise, GitLab.com and self-hosted GitLab. Ever
 
 ![gitlift](docs/screenshot.png)
 
-**You never have to write YAML by hand.** The interface writes the provider file for you on first run, and the *Create a template* flow writes templates, either from scratch, or by reading an existing repository and turning its current settings into a template. The file formats are documented further down for when you want to edit one directly.
+**You never have to write YAML by hand.** The interface writes the provider file for you on first run, and the _Create a template_ flow writes templates, either from scratch, or by reading an existing repository and turning its current settings into a template. The file formats are documented further down for when you want to edit one directly.
 
 ## Install
 
 ```sh
 go install github.com/spaaleks/gitlift/cmd/gitlift@latest
+```
+
+Without a Go toolchain, download the archive for your platform from the [latest release](https://github.com/spaaleks/gitlift/releases/latest) and put the binary on your `PATH`. Each archive holds the binary, the README and the licence, and the `checksums.txt` beside them covers all four.
+
+```sh
+tar -xzf gitlift_linux_amd64.tar.gz
+install -m755 gitlift ~/.local/bin/gitlift
 ```
 
 Or build from a checkout:
@@ -122,7 +129,7 @@ A template with the same `name` shadows the lower-priority one, so you can copy 
 
 ### Building one in the menu
 
-*Create a template* on the main menu writes the YAML for you, from one of three starting points:
+_Create a template_ on the main menu writes the YAML for you, from one of three starting points:
 
 - **from an existing repository**. gitlift reads the project's current settings and writes them out as a template. Features, visibility, default branch, topics, branch rules, tag rules, merge settings and (on GitLab) pipeline settings all come across. Webhooks, integrations, Actions settings and CI/CD variables are deliberately left out, because they carry secrets.
 - **from scratch**. Every toggle the chosen provider supports, set to what a repository normally has, so you switch things off rather than on.
