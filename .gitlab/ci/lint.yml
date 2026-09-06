@@ -1,0 +1,6 @@
+lint:
+  extends: .go
+  script:
+    - make tools
+    - export PATH="$GOPATH/bin:$PATH"
+    - make lint

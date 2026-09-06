@@ -1,0 +1,50 @@
+name: "GitHub docker image"
+description: "GitHub repository that builds and pushes a container image"
+repo:
+  visibility: "private"
+  description: ""
+  features:
+    issues: true
+    wiki: false
+    projects: false
+branch_rules:
+  rules:
+    - name: "main"
+      patterns: ["main"]
+      allow_force_push: false
+      merge_access: "admins"
+      merge_methods: ["merge"]
+    - name: "dev-branches"
+      patterns: ["dev", "dev-*"]
+      allow_force_push: false
+      merge_access: "admins"
+      merge_methods: ["squash"]
+actions:
+  fork_pr_approval: "all_external_contributors"
+  outside_access: "none"
+  default_workflow_permissions: "read"
+  can_approve_pull_requests: false
+ci_cd_variables:
+  - key: "DOCKERHUB_IMAGE"
+    value: "CHANGE_ME"
+    visibility: "all"
+  - key: "DOCKERHUB_USER"
+    value: "CHANGE_ME"
+    visibility: "all"
+  - key: "DOCKERHUB_PASSWORD"
+    value: ""
+    visibility: "private"
+  - key: "QUAY_IMAGE"
+    value: "CHANGE_ME"
+    visibility: "all"
+  - key: "QUAY_USER"
+    value: "CHANGE_ME"
+    visibility: "all"
+  - key: "QUAY_PASSWORD"
+    value: ""
+    visibility: "private"
+providers:
+  github:
+    context:
+      owner: ""
+      owner_type: "user"

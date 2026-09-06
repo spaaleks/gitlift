@@ -1,0 +1,28 @@
+name: "GitLab base"
+description: "Default GitLab project settings"
+repo:
+  visibility: "private"
+  description: ""
+  features:
+    issues: true
+    merge_requests: true
+    wiki: false
+    snippets: false
+    container_registry: false
+branch_rules:
+  rules:
+    - name: "core-branches"
+      patterns: ["main", "dev", "dev-*"]
+      allow_force_push: false
+      push_access: "no_one"
+      merge_access: "maintainers"
+merge_requests:
+  merge_method: "merge"
+  squash: "default_on"
+  delete_source_branch: true
+  pipeline_must_succeed: true
+  all_threads_resolved: true
+providers:
+  gitlab:
+    context:
+      namespace: ""
